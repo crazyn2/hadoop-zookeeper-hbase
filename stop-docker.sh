@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 echo "stopping hadoop cluster..."
 names=$(docker ps | grep 'hadoop-hbase:2.0' | gawk '{print $1}')
 
