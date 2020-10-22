@@ -11,24 +11,25 @@ RUN apt-get update && \
     apt-get install -y sudo apt-utils dialog && \
     apt-get install -y openssh-server && \
     apt-get install -y openjdk-8-jdk
-COPY *.tar.gz /root/
+# COPY *.tar.gz /root/
 COPY config/* /tmp/
 
 # install hadoop 2.7.2
-# RUN tar -xzvf hadoop-2.7.7.tar.gz && \
-#     mv hadoop-2.7.7 /usr/local/hadoop && \
-#     rm hadoop-2.7.7.tar.gz && \
+# RUN tar -xzvf hadoop-3.2.1.tar.gz && \
+#     mv hadoop-3.2.1 /usr/local/hadoop && \
+#     rm hadoop-3.2.1.tar.gz && \
 #     tar -xzvf hbase-1.4.13-bin.tar.gz && \
 #     mv hbase-1.4.13 /usr/local/hbase && \
 #     rm hbase-1.4.13-bin.tar.gz && \
 #     tar -xzvf apache-zookeeper-3.5.8-bin.tar.gz && \
 #     mv apache-zookeeper-3.5.8-bin /usr/local/zookeeper && \
-#     rm apache-zookeeper-3.5.8-bin.tar.gz
+#     rm apache-zookeeper-3.5.8-bin.tar.gz && \
+#     rm *.tar.gz
 
-RUN wget https://mirrors.aliyun.com/apache/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz && \
-    tar -xzvf hadoop-2.7.7.tar.gz && \
-    mv hadoop-2.7.7 /usr/local/hadoop && \
-    rm hadoop-2.7.7.tar.gz && \
+RUN wget https://mirrors.aliyun.com/apache/hadoop/common/stable/hadoop-3.2.1.tar.gz && \
+    tar -xzvf hadoop-3.2.1.tar.gz && \
+    mv hadoop-3.2.1 /usr/local/hadoop && \
+    rm hadoop-3.2.1.tar.gz && \
     wget https://mirrors.aliyun.com/apache/hbase/1.4.13/hbase-1.4.13-bin.tar.gz && \
     tar -xzvf hbase-1.4.13-bin.tar.gz && \
     mv hbase-1.4.13 /usr/local/hbase && \
