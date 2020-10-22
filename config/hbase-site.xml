@@ -1,0 +1,15 @@
+<configuration>
+ <property>
+        <name>hbase.cluster.distributed</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hbase.rootdir</name>
+        <value>hdfs://hadoop-master:9000/hbase</value>
+    </property>
+    <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>hadoop-master,hadoop-slave1,hadoop-slave2</value>
+    </property>
+
+</configuration>
