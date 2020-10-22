@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 
 LABEL maintainer="crazyn"
 
@@ -8,11 +8,9 @@ ADD sources.list /etc/apt/sources.list
 
 # install openssh-server, openjdk and wget
 RUN apt-get update && \
-    apt-get install -y --reinstall software-properties-common sudo apt-utils dialog && \
-    add-apt-repository -y ppa:openjdk-r/ppa && \
-    apt-get update  && apt-get install -y openssh-server openjdk-8-jdk wget && \
-    apt-get -y --purge remove software-properties-common && \
-    apt-get clean all
+    apt-get install -y sudo apt-utils dialog && \
+    apt-get install -y openssh-server && \
+    apt-get install -y openjdk-8-jdk
 COPY *.tar.gz /root/
 COPY config/* /tmp/
 

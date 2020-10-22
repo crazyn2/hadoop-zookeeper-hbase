@@ -28,7 +28,7 @@ chmod +x build-image.sh
 ```
 or
 ```
-docker pull ctazyn/hadoop-hbase:1.0
+docker pull ctazyn/hadoop-hbase:2.0
 ```
 
 

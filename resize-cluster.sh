@@ -23,6 +23,6 @@ echo ""
 echo -e "\nbuild docker hadoop image\n"
 
 # rebuild kiwenlau/hadoop image
-sudo docker build -t ctazyn/hadoop-base:1.0 .
+sudo docker build -t ctazyn/hadoop-base:2.0 .
 
 echo ""
