@@ -15,7 +15,7 @@ sudo docker run -itd \
                 --name hadoop-master \
                 --hostname hadoop-master \
 				-e MYID=1 \
-                ctazyn/hadoop-hbase:1.0 &> /dev/null
+                ctazyn/hadoop-hbase:2.0 &> /dev/null
 
 
 # start hadoop slave container
@@ -30,7 +30,7 @@ do
 	                --name hadoop-slave$i \
 	                --hostname hadoop-slave$i \
 					-e MYID=$myid \
-	                ctazyn/hadoop-hbase:1.0 &> /dev/null
+	                ctazyn/hadoop-hbase:2.0 &> /dev/null
 	i=$(( $i + 1 ))
 done 
 
