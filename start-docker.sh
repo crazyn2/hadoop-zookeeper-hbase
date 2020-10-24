@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "starting hadoop cluster..."
 names=$(docker ps -a | grep 'hadoop-hbase:2.0' | gawk '{print $1}')
-if [ -z $names ]
+if [ ! -n i"$names" ]
 then
     echo "There is no container based on hadoop-hbase:2.0 images."
 else
