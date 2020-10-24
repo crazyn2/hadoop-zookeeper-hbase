@@ -132,8 +132,8 @@ chmod +x start-docker.sh
 ./start-docker.sh
 
 ```
-## Development
-upgrade the base image  and java 7 to ubuntu 18.04 and lastest java version
+## Development with VScode + Maven + Java11 + Docker
+
 ## Referece Blogs
 - Blog: [Run Hadoop Cluster in Docker Update](http://kiwenlau.com/2016/06/26/hadoop-cluster-docker-update-english/)
 - 博客: [基于Docker搭建Hadoop集群之升级版](http://kiwenlau.com/2016/06/12/160612-hadoop-cluster-docker-update/)
