@@ -61,7 +61,7 @@ root@hadoop-master:~#
 ```
 ./start-hadoop.sh
 ```
-[local monitor website](http://127.0.0.1:8088)
+
 ##### 6. run wordcount
 
 ```
@@ -115,7 +115,7 @@ do 5~6 like section A
 /usr/local/hbase/bin/start-hbase.sh
 ```
 Warning：please wait at least 3 min until the application launches successfully
-[local monitor website](http://127.0.0.1:16010)
+
 
 ##### 8. start hbase shell
 ```
@@ -132,6 +132,10 @@ chmod +x start-docker.sh
 ./start-docker.sh
 
 ```
+[ResourceManager](http://127.0.0.1:8088)
+[NameNode](http://127.0.0.1:50700)
+[Hbase](http://127.0.0.1:16010)
+[Mapreduce](http://127.0.0.1:19888)
 ## Development with VScode + Maven + Java11 + Docker
 
 ## Referece Blogs
