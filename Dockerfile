@@ -10,7 +10,7 @@ ADD sources.list /etc/apt/sources.list
 RUN apt-get update && \
     apt-get install -y sudo apt-utils dialog && \
     apt-get install -y openssh-server && \
-    apt-get install -y openjdk-8-jdk
+    apt-get install -y openjdk-11-jdk
 
 COPY config/* /tmp/
 
@@ -44,7 +44,7 @@ COPY config/* /tmp/
     rm apache-zookeeper-3.5.8.tar.gz
 
 # set environment variable
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 
 ENV HADOOP_HOME=/usr/local/hadoop 
 ENV HBASE_HOME=/usr/local/hbase
 ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin 
