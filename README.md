@@ -137,7 +137,30 @@ chmod +x start-docker.sh
 [Hbase](http://127.0.0.1:16010)
 [Mapreduce](http://127.0.0.1:19888)
 ## Development with VScode + Maven + Java11 + Docker
-
+- VScode plugins:Java Extension Pack(Microsoft), Docker(Microsoft), Remote Explorer(Microsoft)
+![Java](MavenJava.png)
+![Docker](Docker.png)
+![RemoteExplorer](RemoteExplorer.png)
+##### 1.maven build java project directory
+```
+mvn archetype:generate "-DgroupId=com.companyname.bank" "-DartifactId=consumerBanking" "-DarchetypeArtifactId=maven-archetype-quickstart" "-DinteractiveMode=false"
+```
+##### 2.VScode connect hadoop-master of docker container by Docker and Remote Explorer plugins
+click Remote Explorer plugin icon which is in the left extension volumn and right click the expected container "attach the container" chioce.
+Then please wait for a while until the VScode remote server applications is installed.By the way, if the Java Extension Pack plugin remote server isn't installed, you should finish it manually which automatically builds settting.json and launch.json in docker container.
+##### 3.Open folder in VScode
+##### 4.Build jar file in target directory
+```
+mvn package
+```
+##### 5.Run jar file in hadoop
+```
+hadoop jar {filename}.jar {mainClassPath}
+```
+Exmple
+``` 
+hadoop jar consumerBanking-1.0-SNAPSHOT.jar com/companyname/bank/App
+```
 ## Referece Blogs
 - Blog: [Run Hadoop Cluster in Docker Update](http://kiwenlau.com/2016/06/26/hadoop-cluster-docker-update-english/)
 - 博客: [基于Docker搭建Hadoop集群之升级版](http://kiwenlau.com/2016/06/12/160612-hadoop-cluster-docker-update/)
