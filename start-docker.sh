@@ -6,5 +6,6 @@ then
     echo "There is no container based on hadoop-hbase:2.1 images."
 else
     docker start $names
+    docker exec -it hadoop-master /bin/bash -c "./start*.sh"
     docker exec -it hadoop-master /bin/bash
 fi
