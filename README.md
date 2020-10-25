@@ -133,9 +133,17 @@ chmod +x start-docker.sh
 
 ```
 [ResourceManager](http://127.0.0.1:8088)
-[NameNode](http://127.0.0.1:50700)
+
+[NameNode in hadoop2](http://127.0.0.1:50700)
+
+[NameNode in hadoop3](http://127.0.0.1:9870)
+
 [Hbase](http://127.0.0.1:16010)
+
 [Mapreduce](http://127.0.0.1:19888)
+```
+mapred --daemon start historyserver
+```
 ## Development with VScode + Maven + Java11 + Docker
 - VScode plugins:Java Extension Pack(Microsoft), Docker(Microsoft), Remote Explorer(Microsoft)
 ![Java](MavenJava.png)
