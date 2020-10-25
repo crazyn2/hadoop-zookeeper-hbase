@@ -11,7 +11,7 @@ ADD sources.list /etc/apt/sources.list
 # applications installation requests from terminal computer or 
 # give back an error without mercy. 
 RUN apt-get update && \
-    apt-get install -y sudo apt-utils dialog && \
+    # apt-get install -y sudo apt-utils dialog && \
     apt-get install -y openssh-server && \
     apt-get install -y openjdk-11-jdk && \
     apt-get install -y maven gradle && \
