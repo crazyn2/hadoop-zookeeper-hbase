@@ -6,20 +6,27 @@ WORKDIR /root
 ADD sources.list /etc/apt/sources.list
 
 
-# install openssh-server, openjdk and wget
+# install openssh-server, openjdk 
+# the aliyun image source can't accept more than three
+# applications installation requests from terminal computer or 
+# give back an error without mercy. 
 RUN apt-get update && \
     # apt-get install -y sudo apt-utils dialog && \
     apt-get install -y openssh-server && \
-    apt-get install -y openjdk-11-jdk maven && \
-    apt-get install -y gradle
+    apt-get install -y openjdk-11-jdk && \
+    apt-get install -y maven gradle && \
+    apt-get install -y net-tools openjdk-8-jdk
 
 COPY config/* /tmp/
 
 # install hadoop 2.7.2
 # COPY *.tar.gz /root/
-# RUN tar -xzvf hadoop-2.7.7.tar.gz && \
-#     mv hadoop-2.7.7 /usr/local/hadoop && \
-#     rm hadoop-2.7.7.tar.gz && \
+# RUN tar -xzvf hadoop-3.2.1.tar.gz && \
+#     mv hadoop-3.2.1 /usr/local/hadoop && \
+#     rm hadoop-3.2.1.tar.gz && \
+# # RUN tar -xzvf hadoop-2.7.7.tar.gz && \
+# #     mv hadoop-2.7.7 /usr/local/hadoop && \
+# #     rm hadoop-2.7.7.tar.gz && \
 #     tar -xzvf hbase-1.4.13-bin.tar.gz && \
 #     mv hbase-1.4.13 /usr/local/hbase && \
 #     rm hbase-1.4.13-bin.tar.gz && \
@@ -61,7 +68,8 @@ RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
     mv /tmp/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml && \
     mv /tmp/mapred-site.xml $HADOOP_HOME/etc/hadoop/mapred-site.xml && \
     mv /tmp/yarn-site.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml && \
-    mv /tmp/slaves $HADOOP_HOME/etc/hadoop/slaves && \
+    # mv /tmp/slaves $HADOOP_HOME/etc/hadoop/slaves && \
+    mv /tmp/workers $HADOOP_HOME/etc/hadoop/workers && \
     mv /tmp/start-hadoop.sh ~/start-hadoop.sh && \
     mv /tmp/run-wordcount.sh ~/run-wordcount.sh && \
     mv /tmp/zoo.cfg /usr/local/zookeeper/conf/ && \
@@ -73,6 +81,7 @@ RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
     chmod +x $HADOOP_HOME/sbin/start-dfs.sh && \
     chmod +x $HADOOP_HOME/sbin/start-yarn.sh && \
     chmod +x ~/run.sh && \
+    chmod 600 ~/.ssh/config && \
     /usr/local/hadoop/bin/hdfs namenode -format     
 
 # format namenode
