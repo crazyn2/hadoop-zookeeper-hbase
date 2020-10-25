@@ -10,7 +10,8 @@ ADD sources.list /etc/apt/sources.list
 RUN apt-get update && \
     apt-get install -y sudo apt-utils dialog && \
     apt-get install -y openssh-server && \
-    apt-get install -y openjdk-11-jdk maven gradle
+    apt-get install -y openjdk-11-jdk maven && \
+    apt-get install -y gradle
 
 COPY config/* /tmp/
 
