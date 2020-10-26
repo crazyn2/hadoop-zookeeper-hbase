@@ -1,2 +1,6 @@
 .DS_Store
 *.tar.gz
+.vscode-server
+.vscode-server/
+gradle*
+gradle*/

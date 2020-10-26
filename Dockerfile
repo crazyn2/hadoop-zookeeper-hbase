@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 LABEL maintainer="crazyn"
 
@@ -14,11 +14,12 @@ RUN apt-get update && \
     # apt-get install -y sudo apt-utils dialog && \
     apt-get install -y openssh-server && \
     apt-get install -y openjdk-11-jdk && \
-    apt-get install -y maven gradle && \
+    apt-get install -y maven && \
     apt-get install -y openjdk-8-jdk
 
 COPY config/* /tmp/
-
+# COPY .vscode-server /root/
+# COPY gradle-6.7 /opt/gradle
 # install hadoop 2.7.2
 # COPY *.tar.gz /root/
 # RUN tar -xzvf hadoop-3.2.1.tar.gz && \
@@ -34,10 +35,10 @@ COPY config/* /tmp/
 #     mv apache-zookeeper-3.5.8-bin /usr/local/zookeeper && \
 #     rm apache-zookeeper-3.5.8-bin.tar.gz && \
 #     rm *.tar.gz
-#  RUN wget https://mirrors.aliyun.com/apache/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz && \
-#     tar -xzvf hadoop-2.7.7.tar.gz && \
-#     mv hadoop-2.7.7 /usr/local/hadoop && \
-#     rm hadoop-2.7.7.tar.gz && \
+ RUN wget https://mirrors.aliyun.com/apache/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz && \
+    tar -xzvf hadoop-2.7.7.tar.gz && \
+    mv hadoop-2.7.7 /usr/local/hadoop && \
+    rm hadoop-2.7.7.tar.gz && \
 RUN wget https://mirrors.aliyun.com/apache/hadoop/common/stable/hadoop-3.2.1.tar.gz && \
     tar -xzvf hadoop-3.2.1.tar.gz && \
     mv hadoop-3.2.1 /usr/local/hadoop && \
@@ -54,7 +55,9 @@ RUN wget https://mirrors.aliyun.com/apache/hadoop/common/stable/hadoop-3.2.1.tar
 # set environment variable
 ENV HADOOP_HOME=/usr/local/hadoop 
 ENV HBASE_HOME=/usr/local/hbase
+# ENV GRADLE_HOME=/opt/gradle
 ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin 
+# :${GRADLE_HOME}/bin
 COPY run.sh /root/run.sh
 # ssh without key
 RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \

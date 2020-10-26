@@ -144,6 +144,24 @@ chmod +x start-docker.sh
 ```
 mapred --daemon start historyserver
 ```
+## Solve the problem
+### Complete state
+```
+root@hadoop-master:/usr/local/hadoop/logs# jps
+2148 Jps
+22 QuorumPeerMain
+1832 ResourceManager
+248 NameNode
+476 SecondaryNameNode
+```
+### Start ResourceManager manually
+```
+start-yarn.sh
+```
+### Start DFS manually
+```
+start-dfs.sh
+```
 ## Development with VScode + Maven + Java11 + Docker
 - VScode plugins:Java Extension Pack(Microsoft), Docker(Microsoft), Remote Explorer(Microsoft)
 ![Java](MavenJava.png)
@@ -165,7 +183,7 @@ mvn package
 ```
 hadoop jar {filename}.jar {mainClassPath}
 ```
-Exmple
+Example
 ``` 
 hadoop jar consumerBanking-1.0-SNAPSHOT.jar com/companyname/bank/App
 ```
