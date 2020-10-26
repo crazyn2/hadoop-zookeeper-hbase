@@ -76,6 +76,7 @@ RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
     mv /tmp/hbase-site.xml $HBASE_HOME/conf/ && \
     mv /tmp/regionservers $HBASE_HOME/conf/ && \
     mv /tmp/hbase-env.sh $HBASE_HOME/conf/ && \
+    mv /tmp/Shanghai /etc/localtime &&\
     chmod +x ~/start-hadoop.sh && \
     chmod +x ~/run-wordcount.sh && \
     chmod +x $HADOOP_HOME/sbin/start-dfs.sh && \
