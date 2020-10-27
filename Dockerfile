@@ -16,14 +16,14 @@ RUN apt-get update && \
     apt-get install -y openssh-server && \
     apt-get install -y openjdk-11-jdk && \
     apt-get install -y maven && \
-    apt-get install -y openjdk-8-jdk && \
-    apt-get install -y mariadb-server mariadb-client
+    apt-get install -y openjdk-8-jdk 
+    # apt-get install -y mariadb-server mariadb-client
 
 COPY config/* /tmp/
 # COPY .vscode-server /root/
 # COPY gradle-6.7 /opt/gradle
 # install hadoop 2.7.2
-# COPY *.tar.gz *.jar /root/
+# COPY *.tar.gz /root/
 # RUN tar -xzvf hadoop-3.2.1.tar.gz && \
 #     mv hadoop-3.2.1 /usr/local/hadoop && \
 #     rm hadoop-3.2.1.tar.gz && \
@@ -36,10 +36,6 @@ COPY config/* /tmp/
 #     tar -xzvf apache-zookeeper-3.5.8-bin.tar.gz && \
 #     mv apache-zookeeper-3.5.8-bin /usr/local/zookeeper && \
 #     rm apache-zookeeper-3.5.8-bin.tar.gz && \
-#     tar -xzvf apache-hive-3.1.2-bin.tar.gz && \
-#     mv apache-hive-3.1.2-bin /usr/local/hive && \
-#     mv mariadb-java-client-2.7.0.jar /usr/local/hive/lib/ &&\
-#     rm apache-hive-3.1.2-bin.tar.gz && \
 #     rm *.tar.gz
 #  RUN wget https://mirrors.aliyun.com/apache/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz && \
 #     tar -xzvf hadoop-2.7.7.tar.gz && \
@@ -97,17 +93,12 @@ RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
     mv /tmp/regionservers $HBASE_HOME/conf/ && \
     mv /tmp/hbase-env.sh $HBASE_HOME/conf/ && \
     mv /tmp/Shanghai /etc/localtime &&\
-    mv /tmp/hive-env.sh /tmp/hive-site.xml /tmp/hive-exec-log4j2.properties /tmp/hive-log4j2.properties \
-    ${HIVE_HOME}/conf/ && \
-    rm ${HIVE_HOME}/lib/guava-19.0.jar && \
-    cp ${HADOOP_HOME}/share/hadoop/common/lib/guava-27.0-jre.jar ${HIVE_HOME}/lib/ && \
     chmod +x ~/start-hadoop.sh && \
     chmod +x ~/run-wordcount.sh && \
     chmod +x $HADOOP_HOME/sbin/start-dfs.sh && \
     chmod +x $HADOOP_HOME/sbin/start-yarn.sh && \
     chmod +x ~/run.sh && \
     chmod 600 ~/.ssh/config && \
-    # rm /tmp/* && \
     /usr/local/hadoop/bin/hdfs namenode -format     
 
 # format namenode

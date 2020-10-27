@@ -17,7 +17,7 @@ sudo docker run -itd \
                 --hostname hadoop-master \
 				-e MYID=1 \
 				-e HIVE_HOME=/usr/local/hive \
-                ctazyn/hadoop-hbase:2.2 \
+                ctazyn/hadoop-hbase:2.3 \
 				&> /dev/null
 
 # start hadoop slave container
@@ -32,11 +32,12 @@ do
 	                --name hadoop-slave$i \
 	                --hostname hadoop-slave$i \
 					-e MYID=$myid \
-	                ctazyn/hadoop-hbase:2.2 &> /dev/null
+	                ctazyn/hadoop-hbase:2.3 &> /dev/null
 	i=$(( $i + 1 ))
 done 
 
 # get into hadoop master container
+./mysqlm.sh
 sudo docker exec -it hadoop-master /bin/bash -c "service mysql start && \
 	start-all.sh && /root/mysqlcnf.sh"
 docker exec -it hadoop-master /bin/bash

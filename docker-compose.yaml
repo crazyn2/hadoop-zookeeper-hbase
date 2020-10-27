@@ -1,0 +1,15 @@
+hadoop-master:
+    container_name: hadoop-master
+    image: ctazyn/hadoop-hbase:2.2
+    environment: 
+        MYID:1
+hadoop-slave1:
+    container_name: hadoop-slave1
+    image: ctazyn/hadoop-hbase:2.2
+    environment: 
+        MYID:2
+    hadoop-slave2:
+        container_name: hadoop-slave2
+        image: ctazyn/hadoop-hbase:2.2
+        environment: 
+            MYID:3
