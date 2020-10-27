@@ -28,10 +28,13 @@ chmod +x build-image.sh
 ```
 or
 ```
-docker pull ctazyn/hadoop-hbase:2.0
+docker pull ctazyn/hadoop-hbase:2.3
 ```
-
-
+- ctazyn/hadoop-hbase:1.0 :ubuntu14.04 + hadoop2 + zookeeper3 + hbase1 + openjdk8
+- ctazyn/hadoop-hbase:2.0 :ubuntu18.04 + hadoop2 + zookeeper3 + hbase1 + openjdk8
+- ctazyn/hadoop-hbase:2.1 :ubuntu18.04 + hadoop3 + zookeeper3 + hbase1 + openjdk11(2.1 or later the openjdk is 11)
+- ctazyn/hadoop-hbase:2.2 :ubuntu20.04 + hadoop3 + zookeeper3 + hbase1 + mariadb + hive3 + openjdk11
+- ctazyn/hadoop-hbase:2.3 :hadoop3 + zookeeper3 + hbase1 + openjdk11(mariadb + hive3 just in hadoop-master container to simplify the image disk occupation) (recommanded)
 ##### 3. create hadoop network
 
 ```
