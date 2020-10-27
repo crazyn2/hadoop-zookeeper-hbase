@@ -16,8 +16,9 @@ sudo docker run -itd \
                 --name hadoop-master \
                 --hostname hadoop-master \
 				-e MYID=1 \
-                ctazyn/hadoop-hbase:2.1 &> /dev/null
-
+				-e HIVE_HOME=/usr/local/hive \
+                ctazyn/hadoop-hbase:2.2 \
+				&> /dev/null
 
 # start hadoop slave container
 i=1
@@ -31,10 +32,19 @@ do
 	                --name hadoop-slave$i \
 	                --hostname hadoop-slave$i \
 					-e MYID=$myid \
-	                ctazyn/hadoop-hbase:2.1 &> /dev/null
+	                ctazyn/hadoop-hbase:2.2 &> /dev/null
 	i=$(( $i + 1 ))
 done 
 
 # get into hadoop master container
-sudo docker exec -it hadoop-master /bin/bash -c "start-all.sh"
+sudo docker exec -it hadoop-master /bin/bash -c "/root/mysqlcnf.sh"
 docker exec -it hadoop-master /bin/bash
+# docker exec -it hadoop-master /bin/bash -c 'apt-get install -y mariadb-server mariadb-client && \
+# 				echo 'PATH=$PATH:$HIVE_HOME/bin' >> /root/.bashrc && \
+# 				source /root/.bashrc'
+# docker cp apache-hive-3.1.2-bin.tar.gz hadoop-master:/root/
+# docker exec -it hadoop-master /bin/bash 'tar -xzvf apache-hive-3.1.2-bin.tar.gz && \
+#     mv apache-hive-3.1.2-bin /usr/local/hive && \
+#     rm apache-hive-3.1.2-bin.tar.gz && 
+# 	mv /tmp/hive-env.sh hive-site.xml hive-exec-log4j2.properties hive-log4j2.properties \
+#     ${HIVE_HOME}/conf/ '

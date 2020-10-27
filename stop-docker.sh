@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "stopping hadoop cluster..."
-names=$(docker ps | grep 'hadoop-hbase:2.1' | gawk '{print $1}')
+names=$(docker ps | grep 'hadoop-hbase:2.2' | gawk '{print $1}')
 echo $name
 if [ -z "$names" ]
 then 
