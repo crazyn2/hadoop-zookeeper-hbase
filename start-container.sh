@@ -2,7 +2,20 @@
 
 # the default node number is 3
 N=${1:-3}
-
+echo -e "It will delete containers named hadoop-master,hadoop-slave1,hadoop-slave2\n\
+If you still have vital data in them, please backup them first which id hard to be recovered by\
+excellent disk recovery tools."
+read -r -p	"Are you sure to delete those containers?[Y/n]" choice
+case $choice in
+	[Yy])
+		echo "executing...";;
+	[Nn])
+		echo "aborted."
+		exit 0;;
+	*)
+		echo -e "invalid input...\nexiting"
+		exit 1;;
+esac
 
 # start hadoop master container
 sudo docker rm -f hadoop-master &> /dev/null
