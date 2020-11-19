@@ -15,19 +15,19 @@
 
 ##### 1. clone github repository
 
-```
+```bash
 git clone https://github.com/crazyn2/hadoop-zookeeper-hbase.git
 cd hadoop-zookeeper-hbase
 ```
 
 ##### 2. build docker image or pull re-build image
 
-```
+```bash
 chmod +x build-image.sh
 ./build-image.sh
 ```
 or
-```
+```bash
 docker pull ctazyn/hadoop-hbase:2.3
 ```
 - ctazyn/hadoop-hbase:1.0 :ubuntu14.04 + hadoop2 + zookeeper3 + hbase1 + openjdk8
@@ -37,20 +37,20 @@ docker pull ctazyn/hadoop-hbase:2.3
 - ctazyn/hadoop-hbase:2.3 :hadoop3 + zookeeper3 + hbase1 + openjdk11(mariadb + hive3 just in hadoop-master container to simplify the image disk occupation) (recommanded)
 ##### 3. create hadoop network
 
-```
+```bash
 sudo docker network create --driver=bridge hadoop
 ```
 
 ##### 4. start container
 
-```
+```bash
 chmod +x ./start-container.sh
 ./start-container.sh
 ```
 
 **output:**
 
-```
+```bash
 start hadoop-master container...
 start hadoop-slave1 container...
 start hadoop-slave2 container...
@@ -61,19 +61,19 @@ root@hadoop-master:~#
 
 ##### 5. start hadoop
 
-```
+```bash
 ./start-hadoop.sh
 ```
 
 ##### 6. run wordcount
 
-```
+```bash
 ./run-wordcount.sh
 ```
 
 **output**
 
-```
+```bash
 input file1.txt:
 Hello Hadoop
 
@@ -94,7 +94,7 @@ do 1~3 like section A
 
 ##### 2. rebuild docker image
 
-```
+```bash
 sudo ./resize-cluster.sh 5
 ```
 - specify parameter > 1: 2, 3..
@@ -104,7 +104,7 @@ sudo ./resize-cluster.sh 5
 
 ##### 3. start container
 
-```
+```bash
 sudo ./start-container.sh 5
 ```
 - use the same parameter as the step 2
@@ -114,23 +114,23 @@ sudo ./start-container.sh 5
 do 5~6 like section A
 
 ##### 7. run hbase
-```
+```bash
 /usr/local/hbase/bin/start-hbase.sh
 ```
 Warning：please wait at least 3 min until the application launches successfully
 
 
 ##### 8. start hbase shell
-```
+```bash
 /usr/local/hbase/bin/hbase shell
 ``` 
 ### stop docker cluster
-```
+```bash
 chmod +x stop-docker.sh
 ./stop-docker.sh
 ```
 ### start docker cluster after stopped the cluster
-```
+```bash
 chmod +x start-docker.sh
 ./start-docker.sh
 
@@ -149,7 +149,7 @@ mapred --daemon start historyserver
 ```
 ## Solve the problem
 ### Complete state
-```
+```bash
 root@hadoop-master:/usr/local/hadoop/logs# jps
 2148 Jps
 22 QuorumPeerMain
@@ -158,11 +158,11 @@ root@hadoop-master:/usr/local/hadoop/logs# jps
 476 SecondaryNameNode
 ```
 ### Start ResourceManager manually
-```
+```bash
 start-yarn.sh
 ```
 ### Start DFS manually
-```
+```bash
 start-dfs.sh
 ```
 ## Development with VScode + Maven + Java11 + Docker
@@ -171,7 +171,7 @@ start-dfs.sh
 ![Docker](Docker.png)
 ![RemoteExplorer](RemoteExplorer.png)
 ##### 1.maven build java project directory
-```
+```bash
 mvn archetype:generate "-DgroupId=com.companyname.bank" "-DartifactId=consumerBanking" "-DarchetypeArtifactId=maven-archetype-quickstart" "-DinteractiveMode=false"
 ```
 ##### 2.VScode connect hadoop-master of docker container by Docker and Remote Explorer plugins
@@ -179,15 +179,15 @@ click Remote Explorer plugin icon which is in the left extension volumn and righ
 Then please wait for a while until the VScode remote server applications is installed.By the way, if the Java Extension Pack plugin remote server isn't installed, you should finish it manually which automatically builds settting.json and launch.json in docker container.
 ##### 3.Open folder in VScode
 ##### 4.Build jar file in target directory
-```
+```bash
 mvn package
 ```
 ##### 5.Run jar file in hadoop
-```
+```bash
 hadoop jar {filename}.jar {mainClassPath}
 ```
 Example
-``` 
+``` bash
 hadoop jar consumerBanking-1.0-SNAPSHOT.jar com/companyname/bank/App
 ```
 ## Referece Blogs
