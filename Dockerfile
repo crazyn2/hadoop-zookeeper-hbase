@@ -20,52 +20,27 @@ RUN apt-get update && \
     # apt-get install -y mariadb-server mariadb-client
 
 COPY config/* /tmp/
-# COPY .vscode-server /root/
-# COPY gradle-6.7 /opt/gradle
 # install hadoop 2.7.2
-# COPY *.tar.gz /root/
-# RUN tar -xzvf hadoop-3.2.1.tar.gz && \
-#     mv hadoop-3.2.1 /usr/local/hadoop && \
-#     rm hadoop-3.2.1.tar.gz && \
-# # RUN tar -xzvf hadoop-2.7.7.tar.gz && \
-# #     mv hadoop-2.7.7 /usr/local/hadoop && \
-# #     rm hadoop-2.7.7.tar.gz && \
-#     tar -xzvf hbase-1.4.13-bin.tar.gz && \
-#     mv hbase-1.4.13 /usr/local/hbase && \
-#     rm hbase-1.4.13-bin.tar.gz && \
-#     tar -xzvf apache-zookeeper-3.5.8-bin.tar.gz && \
-#     mv apache-zookeeper-3.5.8-bin /usr/local/zookeeper && \
-#     rm apache-zookeeper-3.5.8-bin.tar.gz && \
-#     rm *.tar.gz
-#  RUN wget https://mirrors.aliyun.com/apache/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz && \
-#     tar -xzvf hadoop-2.7.7.tar.gz && \
-#     mv hadoop-2.7.7 /usr/local/hadoop && \
-#     rm hadoop-2.7.7.tar.gz && \
-RUN wget https://mirrors.aliyun.com/apache/hadoop/common/stable/hadoop-3.2.1.tar.gz && \
-    tar -xzvf hadoop-3.2.1.tar.gz && \
+COPY *.tar.gz /root/
+RUN tar -xzvf hadoop-3.2.1.tar.gz && \
     mv hadoop-3.2.1 /usr/local/hadoop && \
     rm hadoop-3.2.1.tar.gz && \
-    wget https://mirrors.aliyun.com/apache/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz && \
-    mv apache-hive-3.1.2-bin /usr/local/hive && \
-    rm apache-hive-3.1.2-bin.tar.gz && \
-    rm *.tar.gz && \
-    wget https://downloads.mariadb.com/Connectors/java/connector-java-2.7.0/mariadb-java-client-2.7.0.jar &&\
-    mv mariadb-java-client-2.7.0.jar /usr/local/hive/lib/ &&\
-    wget https://mirrors.aliyun.com/apache/hbase/1.4.13/hbase-1.4.13-bin.tar.gz && \
     tar -xzvf hbase-1.4.13-bin.tar.gz && \
     mv hbase-1.4.13 /usr/local/hbase && \
     rm hbase-1.4.13-bin.tar.gz && \
-    wget https://mirrors.aliyun.com/apache/zookeeper/stable/apache-zookeeper-3.5.8.tar.gz && \
-    tar -xzvf apache-zookeeper-3.5.8.tar.gz && \
-    mv apache-zookeeper-3.5.8 /usr/local/zookeeper && \
-    rm apache-zookeeper-3.5.8.tar.gz
-
+    tar -xzvf apache-zookeeper-3.5.8-bin.tar.gz && \
+    mv apache-zookeeper-3.5.8-bin /usr/local/zookeeper && \
+    rm apache-zookeeper-3.5.8-bin.tar.gz && \
+    tar -xzvf apache-hive-3.1.2-bin.tar.gz && \
+    mv apache-hive-3.1.2-bin /usr/local/hive && \
+    rm apache-hive-3.1.2-bin.tar.gz 
+    # rm *.tar.gz
 # set environment variable
 ENV HADOOP_HOME=/usr/local/hadoop 
 ENV HBASE_HOME=/usr/local/hbase
 ENV HIVE_HOME=/usr/local/hive
 # ENV GRADLE_HOME=/opt/gradle
-ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin:${HIVE_HOME}/bin
+ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin:${HIVE_HOME}/bin:${HBASE_HOME}/bin
 # :${GRADLE_HOME}/bin
 COPY run.sh /root/run.sh
 # ssh without key

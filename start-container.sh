@@ -54,9 +54,7 @@ done
 sudo docker exec -it hadoop-master /bin/bash -c "service mysql start && \
 	start-all.sh && /root/mysqlcnf.sh"
 docker exec -it hadoop-master /bin/bash
-# docker exec -it hadoop-master /bin/bash -c 'apt-get install -y mariadb-server mariadb-client && \
-# 				echo 'PATH=$PATH:$HIVE_HOME/bin' >> /root/.bashrc && \
-# 				source /root/.bashrc'
+
 # docker cp apache-hive-3.1.2-bin.tar.gz hadoop-master:/root/
 # docker exec -it hadoop-master /bin/bash 'tar -xzvf apache-hive-3.1.2-bin.tar.gz && \
 #     mv apache-hive-3.1.2-bin /usr/local/hive && \
