@@ -30,7 +30,7 @@ sudo docker run -itd \
                 --hostname hadoop-master \
 				-e MYID=1 \
 				-e HIVE_HOME=/usr/local/hive \
-                ctazyn/hadoop-spark-hbase:latest \
+                ctazyn/hadoop-hbase:2.3 \
 				&> /dev/null
 
 # start hadoop slave container
@@ -45,7 +45,7 @@ do
 	                --name hadoop-slave$i \
 	                --hostname hadoop-slave$i \
 					-e MYID=$myid \
-	                ctazyn/hadoop-hbase:latest &> /dev/null
+	                ctazyn/hadoop-hbase:2.3 &> /dev/null
 	i=$(( $i + 1 ))
 done 
 
