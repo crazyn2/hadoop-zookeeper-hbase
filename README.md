@@ -190,6 +190,13 @@ Example
 ``` bash
 hadoop jar consumerBanking-1.0-SNAPSHOT.jar com/companyname/bank/App
 ```
+### Run docker container witch is composed by hadoop-spark
+container: ctazyn/hadoop-spark-hbase:latest(Ubuntu20.04+hadoop3.3+spark3)
+##### 1.Download container
+```sh
+docker pull ctazyn/hadoop-spark-hbase:latest
+```
+Then the similar shell scripts whose name is inserted into spark
 ## Referece Blogs
 - Blog: [Run Hadoop Cluster in Docker Update](http://kiwenlau.com/2016/06/26/hadoop-cluster-docker-update-english/)
 - 博客: [基于Docker搭建Hadoop集群之升级版](http://kiwenlau.com/2016/06/12/160612-hadoop-cluster-docker-update/)
