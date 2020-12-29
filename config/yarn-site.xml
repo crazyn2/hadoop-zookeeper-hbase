@@ -6,7 +6,7 @@
     </property>
     <property>
         <name>yarn.resourcemanager.hostname</name>
-        <value>hadoop-master</value>
+        <value>hadoop-spark-master</value>
     </property>
     <property>
         <name>yarn.nodemanager.vmem-check-enabled</name>

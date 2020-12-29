@@ -5,11 +5,11 @@
     </property>
     <property>
         <name>hbase.rootdir</name>
-        <value>hdfs://hadoop-master:9000/hbase</value>
+        <value>hdfs://hadoop-spark-master:9000/hbase</value>
     </property>
     <property>
         <name>hbase.zookeeper.quorum</name>
-        <value>hadoop-master,hadoop-slave1,hadoop-slave2</value>
+        <value>hadoop-spark-master,hadoop-spark-slave1,hadoop-spark-slave2</value>
     </property>
 
 </configuration>

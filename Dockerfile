@@ -20,11 +20,12 @@ RUN apt-get update && \
     # apt-get install -y mariadb-server mariadb-client
 
 COPY config/* /tmp/
+COPY spark-3.0.1-bin-without-hadoop.tgz /root/
 # install hadoop 2.7.2
 COPY *.tar.gz /root/
-RUN tar -xzvf hadoop-3.2.1.tar.gz && \
-    mv hadoop-3.2.1 /usr/local/hadoop && \
-    rm hadoop-3.2.1.tar.gz && \
+RUN tar -xzvf hadoop-3.3.0.tar.gz && \
+    mv hadoop-3.3.0 /usr/local/hadoop && \
+    rm hadoop-3.3.0.tar.gz && \
     tar -xzvf hbase-1.4.13-bin.tar.gz && \
     mv hbase-1.4.13 /usr/local/hbase && \
     rm hbase-1.4.13-bin.tar.gz && \
@@ -33,14 +34,18 @@ RUN tar -xzvf hadoop-3.2.1.tar.gz && \
     rm apache-zookeeper-3.5.8-bin.tar.gz && \
     tar -xzvf apache-hive-3.1.2-bin.tar.gz && \
     mv apache-hive-3.1.2-bin /usr/local/hive && \
-    rm apache-hive-3.1.2-bin.tar.gz 
+    rm apache-hive-3.1.2-bin.tar.gz &&\
+    tar -xzvf spark-3.0.1-bin-without-hadoop.tgz && \
+    mv spark-3.0.1-bin-without-hadoop /usr/local/spark && \
+    rm spark-3.0.1-bin-without-hadoop.tgz
     # rm *.tar.gz
 # set environment variable
 ENV HADOOP_HOME=/usr/local/hadoop 
 ENV HBASE_HOME=/usr/local/hbase
 ENV HIVE_HOME=/usr/local/hive
 # ENV GRADLE_HOME=/opt/gradle
-ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin:${HIVE_HOME}/bin:${HBASE_HOME}/bin
+ENV SPARK_HOME=/usr/local/spark
+ENV PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin:${HIVE_HOME}/bin:${HBASE_HOME}/bin:${SPARK_HOME}/bin
 # :${GRADLE_HOME}/bin
 COPY run.sh /root/run.sh
 # ssh without key
@@ -68,6 +73,8 @@ RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
     mv /tmp/regionservers $HBASE_HOME/conf/ && \
     mv /tmp/hbase-env.sh $HBASE_HOME/conf/ && \
     mv /tmp/Shanghai /etc/localtime &&\
+    mv /tmp/slaves $SPARK_HOME/conf/ && \
+    mv /tmp/spark-env.sh ${SPARK_HOME}/conf/ && \
     chmod +x ~/start-hadoop.sh && \
     chmod +x ~/run-wordcount.sh && \
     chmod +x $HADOOP_HOME/sbin/start-dfs.sh && \

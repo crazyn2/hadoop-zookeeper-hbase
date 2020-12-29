@@ -6,10 +6,10 @@ start_container(){
         echo "There is no container $1."
     else
         docker start $names
-        if [ $1 = "hadoop-master" ]
+        if [ $1 = "hadoop-spark-master" ]
         then
-            docker exec -it hadoop-master /bin/bash -c "start-all.sh && service mysql start" 
-            docker exec -it hadoop-master /bin/bash
+            docker exec -it hadoop-spark-master /bin/bash -c "start-all.sh && service mysql start" 
+            docker exec -it hadoop-spark-master /bin/bash
         fi
     fi
 }
@@ -24,7 +24,7 @@ stop_container(){
     fi
     # echo ""
 }
-lists=("hadoop-slave1" "hadoop-slave2" "hadoop-master")
+lists=("hadoop-spark-slave1" "hadoop-spark-slave2" "hadoop-spark-master")
 # for list in ${lists[@]}
 # do 
 #     if [ $list = "hadoop-master" ]
