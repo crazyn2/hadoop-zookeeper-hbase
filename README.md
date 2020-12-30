@@ -190,13 +190,20 @@ Example
 ``` bash
 hadoop jar consumerBanking-1.0-SNAPSHOT.jar com/companyname/bank/App
 ```
-### Run docker container witch is composed by hadoop-spark
+### Run docker container which is composed by hadoop-spark
 container: ctazyn/hadoop-spark-hbase:latest(Ubuntu20.04+hadoop3.3+spark3)
 ##### 1.Download container
 ```sh
 docker pull ctazyn/hadoop-spark-hbase:latest
 ```
 Then the similar shell scripts whose name is inserted into spark
+### Error repair manually
+##### 1.ERROR: Can't get master address from ZooKeeper; znode data == null
+This error is caused by failed zookeeper processs.Sometimes, the zookeeper couldn't be launched by start-all.sh shell script, but the hbase is still launched which is based on zookeeper.
+
+Solution:
+
+Restart the cluster by running stop-docker.sh and start-docker.sh, then start zookeeper service manunally by bashing start-yarn.sh, finally launch hbase processs justing executing start-hbase.sh
 ## Referece Blogs
 - Blog: [Run Hadoop Cluster in Docker Update](http://kiwenlau.com/2016/06/26/hadoop-cluster-docker-update-english/)
 - 博客: [基于Docker搭建Hadoop集群之升级版](http://kiwenlau.com/2016/06/12/160612-hadoop-cluster-docker-update/)
