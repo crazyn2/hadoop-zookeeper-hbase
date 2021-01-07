@@ -26,10 +26,13 @@ sudo docker run -itd \
                 -p 8088:8088/tcp \
 				-p 16010:16010/tcp \
 				-p 19888:19888/tcp \
+				-p 19888:19888/udp \
                 --name hadoop-spark-master \
                 --hostname hadoop-spark-master \
 				-e MYID=1 \
 				-e HIVE_HOME=/usr/local/hive \
+				-e TERM=xterm-256color \
+				-v $PWD/docker-workspace:/root/workspace \
                 ctazyn/hadoop-spark-hbase:latest \
 				&> /dev/null
 
@@ -50,7 +53,7 @@ do
 done 
 
 # get into hadoop master container
-# ./mysqlm.sh
+./mysqlm-spark.sh
 sudo docker exec -it hadoop-spark-master /bin/bash -c "service mysql start && /root/mysqlcnf.sh"
 docker exec -it hadoop-spark-master /bin/bash
 

@@ -1,0 +1,2 @@
+grant all on *.* to 'root'@'localhost' identified by '123456' with grant option;
+flush privileges;

@@ -12,3 +12,7 @@ consumerBanking/*
 *.tgz
 .*/
 .*
+consumerBanking/
+docker-workspace/
+myconfig/
+

@@ -4,7 +4,7 @@ echo ${MYID} > /usr/local/zookeeper/data/myid
 bash /usr/local/zookeeper/bin/zkServer.sh start
 service ssh start
 start-all.sh
-# $SPARK_HOME/sbin/start-all.sh
+$SPARK_HOME/sbin/start-all.sh
 # systemctl enable mariadb
 tail -f /dev/null
 # tail -f /var/log/dmesg

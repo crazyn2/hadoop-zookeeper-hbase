@@ -28,13 +28,15 @@ chmod +x build-image.sh
 ```
 or
 ```bash
-docker pull ctazyn/hadoop-hbase:2.3
+docker pull ctazyn/hadoop-hbase:latest
 ```
 - ctazyn/hadoop-hbase:1.0 :ubuntu14.04 + hadoop2 + zookeeper3 + hbase1 + openjdk8
 - ctazyn/hadoop-hbase:2.0 :ubuntu18.04 + hadoop2 + zookeeper3 + hbase1 + openjdk8
 - ctazyn/hadoop-hbase:2.1 :ubuntu18.04 + hadoop3 + zookeeper3 + hbase1 + openjdk11(2.1 or later the openjdk is 11)
 - ctazyn/hadoop-hbase:2.2 :ubuntu20.04 + hadoop3 + zookeeper3 + hbase1 + mariadb + hive3 + openjdk11
-- ctazyn/hadoop-hbase:2.3 :hadoop3 + zookeeper3 + hbase1 + openjdk11(mariadb + hive3 just in hadoop-master container to simplify the image disk occupation) (recommanded)
+- ctazyn/hadoop-hbase:2.3 :hadoop3 + zookeeper3 + hbase1 + openjdk11(mariadb + hive3 just in hadoop-master container to simplify the image disk occupation)
+- ctazyn/hadoop-hbase:latest(repair several bugs and enhance security level)(recommanded)
+- ctazyn/hadoop-spark-hbase:latest(just append spark frame)(recommanded)
 ##### 3. create hadoop network
 
 ```bash
@@ -204,6 +206,14 @@ This error is caused by failed zookeeper processs.Sometimes, the zookeeper could
 Solution:
 
 Restart the cluster by running stop-docker.sh and start-docker.sh, then start zookeeper service manunally by bashing start-yarn.sh, finally launch hbase processs justing executing start-hbase.sh
+##### 2.ERROR:Caused by: org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hbase.TableExistsException):{tableName}
+Caused:
+
+Rebuild docker container named hadoop-master  after import data into hbase and run java project again.
+
+Solution:
+
+Delete other hbase nodes by zookeeper-cli or rebuild the docker cluster
 ## Referece Blogs
 - Blog: [Run Hadoop Cluster in Docker Update](http://kiwenlau.com/2016/06/26/hadoop-cluster-docker-update-english/)
 - 博客: [基于Docker搭建Hadoop集群之升级版](http://kiwenlau.com/2016/06/12/160612-hadoop-cluster-docker-update/)

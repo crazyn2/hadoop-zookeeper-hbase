@@ -30,7 +30,9 @@ sudo docker run -itd \
                 --hostname hadoop-master \
 				-e MYID=1 \
 				-e HIVE_HOME=/usr/local/hive \
-                ctazyn/hadoop-hbase:2.3 \
+				-e TERM=xterm-256color \
+				-v $PWD/docker-workspace:/root/workspace \
+                ctazyn/hadoop-hbase:latest \
 				&> /dev/null
 
 # start hadoop slave container
@@ -45,13 +47,13 @@ do
 	                --name hadoop-slave$i \
 	                --hostname hadoop-slave$i \
 					-e MYID=$myid \
-	                ctazyn/hadoop-hbase:2.3 &> /dev/null
+	                ctazyn/hadoop-hbase:latest&> /dev/null
 	i=$(( $i + 1 ))
 done 
 
 # get into hadoop master container
-# ./mysqlm.sh
-sudo docker exec -it hadoop-master /bin/bash -c "service mysql start && /root/mysqlcnf.sh"
+./mysqlm.sh
+sudo docker exec -it hadoop-master /bin/bash -c "/root/mysqlcnf.sh"
 docker exec -it hadoop-master /bin/bash
 
 # docker cp apache-hive-3.1.2-bin.tar.gz hadoop-master:/root/
@@ -60,3 +62,4 @@ docker exec -it hadoop-master /bin/bash
 #     rm apache-hive-3.1.2-bin.tar.gz && 
 # 	mv /tmp/hive-env.sh hive-site.xml hive-exec-log4j2.properties hive-log4j2.properties \
 #     ${HIVE_HOME}/conf/ '
+# docker run -itd  --net=hadoop -p 9870:9870/tcp -p 8088:8088/tcp -p 16010:16010/tcp -p 19888:19888/tcp --name hadoop-master --hostname hadoop-master -e MYID=1 -e HIVE_HOME=/usr/local/hive -v $PWD/docker-workspace:/root/ ctazyn/hadoop-hbase:2.3
