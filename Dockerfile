@@ -22,19 +22,19 @@ RUN apt-get update && \
 COPY config/* /tmp/
 # install hadoop 2.7.2
 COPY *.tar.gz /root/
-RUN tar -xzvf hadoop-3.3.0.tar.gz && \
-    mv hadoop-3.3.0 /usr/local/hadoop && \
-    rm hadoop-3.3.0.tar.gz && \
-    tar -xzvf hbase-1.4.13-bin.tar.gz && \
-    mv hbase-1.4.13 /usr/local/hbase && \
-    rm hbase-1.4.13-bin.tar.gz && \
+RUN tar -xzvf hadoop-3.2.1.tar.gz && \
+    mv hadoop-3.2.1 /usr/local/hadoop && \
+    rm hadoop-3.2.1.tar.gz && \
+    tar -xzvf hbase-2.3.3-bin.tar.gz && \
+    mv hbase-2.3.3 /usr/local/hbase && \
+    rm hbase-2.3.3-bin.tar.gz && \
     tar -xzvf apache-zookeeper-3.5.8-bin.tar.gz && \
     mv apache-zookeeper-3.5.8-bin /usr/local/zookeeper && \
     rm apache-zookeeper-3.5.8-bin.tar.gz && \
     tar -xzvf apache-hive-3.1.2-bin.tar.gz && \
     mv apache-hive-3.1.2-bin /usr/local/hive && \
-    rm apache-hive-3.1.2-bin.tar.gz
-    # rm *.tar.gz
+    rm apache-hive-3.1.2-bin.tar.gz &&\
+    rm *.tar.gz
 # set environment variable
 ENV HADOOP_HOME=/usr/local/hadoop 
 ENV HBASE_HOME=/usr/local/hbase

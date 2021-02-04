@@ -199,6 +199,10 @@ container: ctazyn/hadoop-spark-hbase:latest(Ubuntu20.04+hadoop3.3+spark3)
 docker pull ctazyn/hadoop-spark-hbase:latest
 ```
 Then the similar shell scripts whose name is inserted into spark
+##### 2.Start spark shell
+```sh
+spark-shell
+```
 ### Error repair manually
 ##### 1.ERROR: Can't get master address from ZooKeeper; znode data == null
 This error is caused by failed zookeeper processs.Sometimes, the zookeeper couldn't be launched by start-all.sh shell script, but the hbase is still launched which is based on zookeeper.
@@ -214,6 +218,14 @@ Rebuild docker container named hadoop-master  after import data into hbase and r
 Solution:
 
 Delete other hbase nodes by zookeeper-cli or rebuild the docker cluster
+##### 3. Error: connect ECONNREFUSED 127.0.0.1:8889 at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1134:16)
+Solution:
+
+duplicate .vscode-server folder to container:/root/
+
+```sh
+docker cp .vscode-server hadoop-master:/root/
+```
 ## Referece Blogs
 - Blog: [Run Hadoop Cluster in Docker Update](http://kiwenlau.com/2016/06/26/hadoop-cluster-docker-update-english/)
 - 博客: [基于Docker搭建Hadoop集群之升级版](http://kiwenlau.com/2016/06/12/160612-hadoop-cluster-docker-update/)

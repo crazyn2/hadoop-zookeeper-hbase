@@ -16,3 +16,5 @@ consumerBanking/
 docker-workspace/
 myconfig/
 
+node_modules/
+package-lock.json

@@ -19,16 +19,17 @@ RUN apt-get update && \
     apt-get install -y openjdk-8-jdk 
     # apt-get install -y mariadb-server mariadb-client
 
-COPY config/* /tmp/
-COPY spark-3.0.1-bin-without-hadoop.tgz /root/
+COPY config-spark/* /tmp/
+# COPY spark-3.0.1-bin-without-hadoop.tgz /root/
 # install hadoop 2.7.2
 COPY *.tar.gz /root/
-RUN tar -xzvf hadoop-3.3.0.tar.gz && \
-    mv hadoop-3.3.0 /usr/local/hadoop && \
-    rm hadoop-3.3.0.tar.gz && \
-    tar -xzvf hbase-1.4.13-bin.tar.gz && \
-    mv hbase-1.4.13 /usr/local/hbase && \
-    rm hbase-1.4.13-bin.tar.gz && \
+
+RUN tar -xzvf hadoop-3.2.1.tar.gz && \
+    mv hadoop-3.2.1 /usr/local/hadoop && \
+    rm hadoop-3.2.1.tar.gz && \
+    tar -xzvf hbase-2.3.3-bin.tar.gz && \
+    mv hbase-2.3.3 /usr/local/hbase && \
+    rm hbase-2.3.3-bin.tar.gz && \
     tar -xzvf apache-zookeeper-3.5.8-bin.tar.gz && \
     mv apache-zookeeper-3.5.8-bin /usr/local/zookeeper && \
     rm apache-zookeeper-3.5.8-bin.tar.gz && \
@@ -37,7 +38,7 @@ RUN tar -xzvf hadoop-3.3.0.tar.gz && \
     rm apache-hive-3.1.2-bin.tar.gz &&\
     tar -xzvf spark-3.0.1-bin-without-hadoop.tgz && \
     mv spark-3.0.1-bin-without-hadoop /usr/local/spark && \
-    rm spark-3.0.1-bin-without-hadoop.tgz
+    rm spark-3.0.1-bin-without-hadoop.tgz 
     # rm *.tar.gz
 # set environment variable
 ENV HADOOP_HOME=/usr/local/hadoop 
@@ -79,12 +80,12 @@ RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
     chmod +x ~/run-wordcount.sh && \
     chmod +x $HADOOP_HOME/sbin/start-dfs.sh && \
     chmod +x $HADOOP_HOME/sbin/start-yarn.sh && \
-    chmod +x ~/run.sh && \
+    chmod +x ~/run-spark.sh && \
     chmod 600 ~/.ssh/config && \
     /usr/local/hadoop/bin/hdfs namenode -format     
 
 # format namenode
 # RUN /usr/local/hadoop/bin/hdfs namenode -format
-CMD ["/root/run.sh"]
+CMD ["/root/run-spark.sh"]
 #CMD [ "sh", "-c", "service ssh start; bash"]
 
